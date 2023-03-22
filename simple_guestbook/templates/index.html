@@ -3,10 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <title>Welcome, Guest!</title>
-    <link rel="stylesheet" href="{{url_for('static', filename='guestbook.css') }}"/>
+    {#
+        These curly braces are part of the Jinja templating system. They will be processed and replaced when Flask/Jinja
+        renders this template. See https://jinja.palletsprojects.com for documentation.
+
+        Note the following "url_for()" function. This helps ensure that the correct URL is generated for a resource and
+        should be used for all static assets such as .css files, images, etc. Documentation here:
+        https://flask.palletsprojects.com/en/2.2.x/api/#flask.Flask.url_for
+    #}
+    <link rel="stylesheet" href="{{ url_for('static', filename='guestbook.css') }}"/>
 </head>
 <body>
 <div class="guestbook-form">
+    <div class="happy">
+        {# Example of using a static image in an HTML template #}
+        <img src="{{ url_for('static', filename='happy.png') }}" alt="Happy Face" />
+    </div>
     <form action="/guestbook_post" method="post">
         <p>
             <label for="name">Name:</label><br/>

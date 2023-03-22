@@ -46,6 +46,11 @@ def root():
     return render_template('index.html')
 
 
+@app.route("/guestbook.css")
+def guestbook_css():
+    """This handles the guestoobk.css URL and serves the guestbook CSS file"""
+    return render_template('guestbook.css')
+
 @app.route("/guestbook_post", methods=['POST'])
 def guestbook_post():
     """The guestbook form posts to this URL. If the form parameters are valid, it saves them to the guestbook and

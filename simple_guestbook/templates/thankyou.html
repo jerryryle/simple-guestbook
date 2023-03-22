@@ -3,18 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <title>Thank you, Guest!</title>
-    <link rel="stylesheet" href="{{url_for('static', filename='guestbook.css') }}"/>
+    {#
+        These curly braces are part of the Jinja templating system. They will be processed and replaced when Flask/Jinja
+        renders this template. See https://jinja.palletsprojects.com for documentation.
+
+        Note the following "url_for()" function. This helps ensure that the correct URL is generated for a resource and
+        should be used for all static assets such as .css files, images, etc. Documentation here:
+        https://flask.palletsprojects.com/en/2.2.x/api/#flask.Flask.url_for
+    #}
+    <link rel="stylesheet" href="{{ url_for('static', filename='guestbook.css') }}"/>
 </head>
 <body>
 <div class="thank-you">
     <p>Thank you for signing our guestbook! Here's what you submitted.</p>
     <p>Guest Name: {{ guest_name }}</p>
     <p>Guest Email: {{ guest_email }}</p>
-    <p>Guest Message:</p>
-    <p>
-        {# This inserts HTML breaks for any newlines so the message displays correctly. #}
-        {% for paragraph in guest_message.split('\n') %}
-            {{ paragraph }}<br/>
+    <p>Guest Message:<br/>
+        {#
+            Because we allow users to enter multi-line content in the message, the 'guest_message' variable may contain
+            newlines. Browsers ignore newlines here, so the user's message will appear all on a single line here if we
+            don't account for this. The following splits the message by newline into an array of lines and then iterates
+            over that array, inserting HTML breaks after each line. This will ensure the user's message is displayed as
+            they intended.
+        #}
+        {% for line in guest_message.split('\n') %}
+            {{ line }}<br/>
         {% endfor %}
     </p>
 </div>

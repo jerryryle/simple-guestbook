@@ -8,7 +8,7 @@ Group=www-data
 Environment="PATH=/var/www/simple-guestbook/.venv/bin"
 Environment="GUESTBOOK_FILENAME=/var/www/simple-guestbook/guestbook.txt"
 WorkingDirectory=/var/www/simple-guestbook/
-ExecStart=/var/www/simple-guestbook/.venv/bin/gunicorn --workers 3 --bind unix:/var/www/simple-guestbook/guestbook.sock wsgi:app
+ExecStart=/var/www/simple-guestbook/.venv/bin/gunicorn --workers 3 --bind unix:/tmp/guestbook.sock wsgi:app
 
 [Install]
 WantedBy=multi-user.target

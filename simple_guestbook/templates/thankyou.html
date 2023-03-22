@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Thank you, Guest!</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='guestbook.css') }}"/>
+</head>
+<body>
+<div class="thank-you">
+    <p>Thank you for signing our guestbook! Here's what you submitted.</p>
+    <p>Guest Name: {{ guest_name }}</p>
+    <p>Guest Email: {{ guest_email }}</p>
+    <p>Guest Message:</p>
+    <p>
+        {# This inserts HTML breaks for any newlines so the message displays correctly. #}
+        {% for paragraph in guest_message.split('\n') %}
+            {{ paragraph }}<br/>
+        {% endfor %}
+    </p>
+</div>
+</body>
+</html>

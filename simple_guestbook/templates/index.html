@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome, Guest!</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='guestbook.css') }}"/>
+</head>
+<body>
+<div class="guestbook-form">
+    <form action="/guestbook_post" method="post">
+        <p>
+            <label for="name">Name:</label><br/>
+            <input type="text" id="name" name="guest_name" size="40" placeholder="Your name (optional)"
+                   value="{{ guest_name }}"/>
+        </p>
+        <p>
+            <label for=email">Email:</label><br/>
+            <input type="text" id=email" name="guest_email" size="40" placeholder="Your email (optional)"
+                   value="{{ guest_email }}"/>
+        </p>
+        <p>
+            <label for="message">Message:</label><br/>
+            <textarea id="message" name="guest_message" cols="40" rows="5" placeholder="Your message (required)">{{ guest_message }}</textarea>
+        </p>
+        <p>
+            <button id="submit_button" type="submit">Sign the guestbook</button>
+        </p>
+        {% if error %}
+        <p class="error-text">
+            You must enter a message in order to sign the guestbook!
+        </p>
+        {% endif %}
+    </form>
+</div>
+</body>
+</html>

@@ -8,9 +8,12 @@
 #
 
 server {
-	listen 80 default_server;
-	listen [::]:80 default_server;
-	server_name _;
+    listen 80;
+    listen [::]:80;
+    server_name go.rogueportal;
+
+    # Only allow GET, HEAD, POST
+    if ($request_method !~ ^(GET|HEAD|POST)$) { return 444; }
 
     access_log /var/log/nginx/guestbook.access.log;
     error_log /var/log/nginx/guestbook.error.log;
@@ -19,4 +22,7 @@ server {
         include proxy_params;
         proxy_pass http://unix:/tmp/guestbook.sock;
 	}
+
+	# Redirect these errors to the home page.
+    error_page 401 403 404 =200 /;
 }
